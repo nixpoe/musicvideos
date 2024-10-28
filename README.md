@@ -4,6 +4,7 @@ Ovaj skup podataka sastoji se od informacija o video spotovima za pjesme dostupn
 
 # Autor - Nikola Antolović
 # Verzija skupa podataka - v1.0
+# Podaci su na hrvatskom jeziku
 
 ## Atributi skupa podataka
 
