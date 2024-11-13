@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Prikaz podataka o YouTube spotovima u tablici">
+    <title>YouTube Spotovi</title>
+</head>
+<body>
+    <h1>Podatkovna Tablica</h1>
+    
+    <form id="filterForm">
+        <input type="text" id="searchInput" placeholder="Unesite pojam za pretragu...">
+        <select id="attributeSelect">
+            <option value="all">Svi atributi</option>
+            <option value="Naslov">Naslov</option>
+            <option value="Redatelj">Redatelj</option>
+            <option value="Label">Label</option>
+            <option value="Zanr">Žanr</option>
+            <option value="Izvodac">Izvođač</option>
+        </select>
+        <button type="submit">Filtriraj</button>
+    </form>
+    
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Naslov</th>
+                <th>Redatelj</th>
+                <th>Label</th>
+                <th>Datum</th>
+                <th>Trajanje (sekunde)</th>
+                <th>Žanr</th>
+                <th>Pregledi</th>
+                <th>Komentari</th>
+                <th>Lajkovi</th>
+                <th>Izvođači</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    <br>
+    <a id="downloadJson" href="#">Preuzmi filtrirane podatke u JSON formatu</a>
+    <br>
+    <a id="downloadCsv" href="#">Preuzmi filtrirane podatke u CSV formatu</a>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+
