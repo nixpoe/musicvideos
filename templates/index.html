@@ -8,6 +8,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            {% if 'profile' in session %}
+                <a class="nav-link" href="{{ url_for('profile') }}">Korisnički profil</a>
+                <a class="nav-link" href="{{ url_for('refresh_exports') }}">Osvježi preslike</a>
+                <a class="nav-link" href="{{ url_for('logout') }}">Odjava</a>
+            {% else %}
+                <a class="nav-link" href="{{ url_for('login') }}">Prijava</a>
+            {% endif %}
+        </div>
+    </nav>
+
     <div class="container mt-4">
         <h1>Dobrodošli na stranicu skupa podataka</h1>
         <p>Ovdje možete preuzeti podatke u CSV i JSON formatu ili ih pogledati u tablici.</p>
@@ -39,18 +51,6 @@
         </div>
     </div>
 
-    <script>
-        // Example script for fetching data
-        async function fetchData() {
-            const response = await fetch('/api/v1/spots');
-            const data = await response.json();
-            console.log(data);
-        }
-
-        // Uncomment to test fetching data
-        // fetchData();
-    </script>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,7 +1,36 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, session, url_for, redirect
+from authlib.integrations.flask_client import OAuth
+from functools import wraps
+from os import environ as env
+from dotenv import load_dotenv
 import json
 
+load_dotenv()
+
 app = Flask(__name__)
+app.secret_key = env.get("APP_SECRET_KEY")
+
+oauth = OAuth(app)
+auth0 = oauth.register(
+    'auth0',
+    client_id=env.get("AUTH0_CLIENT_ID"),
+    client_secret=env.get("AUTH0_CLIENT_SECRET"),
+    api_base_url=f'https://{env.get("AUTH0_DOMAIN")}',
+    access_token_url=f'https://{env.get("AUTH0_DOMAIN")}/oauth/token',
+    authorize_url=f'https://{env.get("AUTH0_DOMAIN")}/authorize',
+    jwks_uri=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/jwks.json',
+    client_kwargs={
+        'scope': 'openid profile email'
+    }
+)
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if 'profile' not in session:
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated
 
 def load_data():
     with open('music_videos.json', 'r', encoding='utf-8') as f:
@@ -10,6 +39,42 @@ def load_data():
 def save_data(data):
     with open('music_videos.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+
+@app.route('/login')
+def login():
+    return auth0.authorize_redirect(
+        redirect_uri=url_for('callback', _external=True)
+    )
+
+@app.route('/callback')
+def callback():
+    auth0.authorize_access_token()
+    resp = auth0.get('userinfo')
+    userinfo = resp.json()
+    session['profile'] = userinfo
+    return redirect(url_for('profile'))
+
+@app.route('/profile')
+@requires_auth
+def profile():
+    return render_template('profile.html', userinfo=session['profile'])
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(
+        f'https://{env.get("AUTH0_DOMAIN")}/v2/logout?' +
+        f'client_id={env.get("AUTH0_CLIENT_ID")}&' +
+        f'returnTo={url_for("home", _external=True)}'
+    )
+
+@app.route('/refresh-exports')
+@requires_auth
+def refresh_exports():
+    videos = load_data()
+    # Export to CSV logic here
+    # Export to JSON logic here
+    return jsonify({"message": "Exports refreshed successfully"})
 
 @app.route('/')
 def home():
