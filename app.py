@@ -1,129 +1,158 @@
-from flask import Flask, render_template, jsonify, request, send_file
-import psycopg2
-import csv
+from flask import Flask, request, jsonify, render_template
 import json
-import datetime
-import os
 
 app = Flask(__name__)
 
-# Povezivanje na PostgreSQL bazu
-conn = psycopg2.connect(
-    dbname="YTspotovi",
-    user="postgres",
-    password="1354",
-    host="localhost",
-    port="5432"
-)
+def load_data():
+    with open('music_videos.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
 
-# Funkcija za dohvaćanje podataka s filtriranjem
-def get_filtered_data(query='', attribute='all'):
-    cur = conn.cursor()
-    try:
-        base_sql = """
-        SELECT 
-            s."Naslov", 
-            s."Redatelj", 
-            s."Label", 
-            s."Datum", 
-            s."Trajanje_sekunde", 
-            s."Zanr", 
-            s."pregledi", 
-            s."komentari", 
-            s."lajkovi", 
-            json_agg(i."Ime") AS "izvodaci"
-        FROM "Spotovi" AS s
-        JOIN "spotizvodac" AS si ON s."Naslov" = si."naslovspota"
-        JOIN "Izvodaci" AS i ON i."Ime" = si."izvodac"
-        GROUP BY 
-            s."Naslov", 
-            s."Redatelj", 
-            s."Label", 
-            s."Datum", 
-            s."Trajanje_sekunde", 
-            s."Zanr", 
-            s."pregledi", 
-            s."komentari", 
-            s."lajkovi"
-        """
+def save_data(data):
+    with open('music_videos.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
-        if query:
-            if attribute == "all":
-                sql = f"{base_sql} HAVING s.\"Naslov\" ILIKE %s OR s.\"Redatelj\" ILIKE %s OR s.\"Label\" ILIKE %s OR s.\"Zanr\" ILIKE %s OR json_agg(i.\"Ime\")::text ILIKE %s"
-                cur.execute(sql, (f"%{query}%",) * 5)
-            elif attribute == "Izvodac":
-                sql = f"{base_sql} HAVING json_agg(i.\"Ime\")::text ILIKE %s"
-                cur.execute(sql, (f"%{query}%",))
-            else:
-                sql = f"{base_sql} HAVING s.\"{attribute}\" ILIKE %s"
-                cur.execute(sql, (f"%{query}%",))
-        else:
-            cur.execute(base_sql)
-
-        columns = [desc[0] for desc in cur.description]
-        data = [dict(zip(columns, row)) for row in cur.fetchall()]
-
-        cur.close()
-        return data
-
-    except Exception as e:
-        print(f"Error: {e}")
-        conn.rollback()
-        cur.close()
-        return []
-
-
-
-# Početna stranica
 @app.route('/')
-def index():
+def home():
     return render_template('index.html')
 
-# Stranica s tablicom i filtriranjem
 @app.route('/datatable')
 def datatable():
-    return render_template('datatable.html')
+    videos = load_data()
+    return render_template('datatable.html', videos=videos)
 
-# API za dohvaćanje podataka s filtriranjem
-@app.route('/api/data', methods=['GET'])
-def api_data():
-    query = request.args.get('query', '')
-    attribute = request.args.get('attribute', 'all')
-    data = get_filtered_data(query, attribute)
-    return jsonify(data)
+# CRUD endpoints
+@app.route('/api/v1/spots', methods=['GET'])
+def get_all_videos():
+    videos = load_data()
+    return {
+        "status": "OK",
+        "message": "Dohvaćeni svi glazbeni spotovi",
+        "response": videos
+    }, 200
 
+@app.route('/api/v1/spots/<id>', methods=['GET'])
+def get_video(id):
+    videos = load_data()
+    video = next((v for v in videos if v['id'] == id), None)
+    if not video:
+        return {
+            "status": "Not Found",
+            "message": f"Video s ID-em {id} nije pronađen",
+            "response": None
+        }, 404
+    return {
+        "status": "OK",
+        "message": "Video uspješno dohvaćen",
+        "response": video
+    }, 200
 
-# API za preuzimanje filtriranih podataka u JSON formatu
-def custom_json_converter(obj):
-    if isinstance(obj, datetime.date):
-        return obj.isoformat()
-    raise TypeError(f"Type {type(obj)} not serializable")
+@app.route('/api/v1/spots', methods=['POST'])
+def create_video():
+    videos = load_data()
+    new_video = request.get_json()
+    
+    # Validate required fields
+    required_fields = ["Naslov", "Redatelj", "Label", "Datum", "Trajanje_sekunde", 
+                      "Zanr", "pregledi", "komentari", "lajkovi", "izvodaci"]
+    
+    if not all(field in new_video for field in required_fields):
+        return {
+            "status": "Bad Request",
+            "message": "Nedostaju obavezna polja",
+            "response": None
+        }, 400
+        
+    videos.append(new_video)
+    save_data(videos)
+    return {
+        "status": "Created",
+        "message": "Novi video uspješno dodan",
+        "response": new_video
+    }, 201
 
-@app.route('/api/download/json', methods=['GET'])
-def download_json():
-    query = request.args.get('query', '')
-    attribute = request.args.get('attribute', 'all')
-    data = get_filtered_data(query, attribute)
-    filename = "filtered_data.json"
-    with open(filename, 'w') as f:
-        json.dump(data, f, default=custom_json_converter)
-    return send_file(filename, as_attachment=True)
+@app.route('/api/v1/spots/<id>', methods=['PUT'])
+def update_video(id):
+    videos = load_data()
+    video_data = request.get_json()
+    video_index = next((index for (index, v) in enumerate(videos) if v['id'] == id), None)
+    
+    if video_index is None:
+        return {
+            "status": "Not Found",
+            "message": f"Video s ID-em {id} nije pronađen",
+            "response": None
+        }, 404
+        
+    videos[video_index].update(video_data)
+    save_data(videos)
+    return {
+        "status": "OK",
+        "message": "Video uspješno ažuriran",
+        "response": videos[video_index]
+    }, 200
 
+@app.route('/api/v1/spots/<id>', methods=['DELETE'])
+def delete_video(id):
+    videos = load_data()
+    video_index = next((index for (index, v) in enumerate(videos) if v['id'] == id), None)
+    
+    if video_index is None:
+        return {
+            "status": "Not Found",
+            "message": f"Video s ID-em {id} nije pronađen",
+            "response": None
+        }, 404
+        
+    deleted_video = videos.pop(video_index)
+    save_data(videos)
+    return {
+        "status": "OK",
+        "message": "Video uspješno obrisan",
+        "response": deleted_video
+    }, 200
 
-# API za preuzimanje filtriranih podataka u CSV formatu
-@app.route('/api/download/csv', methods=['GET'])
-def download_csv():
-    query = request.args.get('query', '')
-    attribute = request.args.get('attribute', 'all')
-    data = get_filtered_data(query, attribute)
-    filename = "filtered_data.csv"
-    with open(filename, 'w', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=data[0].keys())
-        writer.writeheader()
-        writer.writerows(data)
-    return send_file(filename, as_attachment=True)
+# Additional GET endpoints
+@app.route('/api/v1/spots/by-genre/<genre>', methods=['GET'])
+def get_videos_by_genre(genre):
+    videos = load_data()
+    filtered_videos = [v for v in videos if genre.lower() in v['Zanr'].lower()]
+    return {
+        "status": "OK",
+        "message": f"Pronađeni spotovi žanra: {genre}",
+        "response": filtered_videos
+    }, 200
 
-# Pokretanje aplikacije
+@app.route('/api/v1/spots/by-label/<label>', methods=['GET'])
+def get_videos_by_label(label):
+    videos = load_data()
+    filtered_videos = [v for v in videos if label.lower() in v['Label'].lower()]
+    return {
+        "status": "OK",
+        "message": f"Pronađeni spotovi izdavačke kuće: {label}",
+        "response": filtered_videos
+    }, 200
+
+@app.route('/api/v1/spots/most-viewed', methods=['GET'])
+def get_most_viewed_videos():
+    videos = load_data()
+    sorted_videos = sorted(videos, key=lambda x: x['pregledi'], reverse=True)
+    limit = request.args.get('limit', default=10, type=int)
+    return {
+        "status": "OK",
+        "message": f"Dohvaćeno {limit} najgledanijih spotova",
+        "response": sorted_videos[:limit]
+    }, 200
+
+@app.route('/api/docs', methods=['GET'])
+def get_api_docs():
+    with open('openapi.json', 'r', encoding='utf-8') as f:
+        spec = json.load(f)
+    return {
+        "status": "OK",
+        "message": "OpenAPI specifikacija uspješno dohvaćena",
+        "response": spec
+    }, 200
+
 if __name__ == '__main__':
     app.run(debug=True)
 

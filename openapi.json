@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Glazbeni Spotovi API",
+    "version": "1.0.0",
+    "description": "API za pristup i upravljanje podacima o glazbenim spotovima na YouTubeu",
+    "contact": {
+      "name": "Nikola Antolović",
+      "url": "https://github.com/nixpoe/musicvideos"
+    },
+    "license": {
+      "name": "CC0 1.0",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  },
+  "paths": {
+    "/api/videos": {
+      "get": {
+        "summary": "Dohvati sve glazbene spotove",
+        "responses": {
+          "200": {
+            "description": "Uspješno dohvaćeni podaci",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VideoResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Dodaj novi glazbeni spot",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VideoInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Video uspješno kreiran"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Video": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "izvodac": { "type": "string" },
+          "pjesma": { "type": "string" },
+          "godina": { "type": "string" },
+          "pregledi": { "type": "string" }
+        }
+      },
+      "VideoResponse": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "string" },
+          "message": { "type": "string" },
+          "response": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Video"
+            }
+          }
+        }
+      },
+      "VideoInput": {
+        "type": "object",
+        "required": ["izvodac", "pjesma", "godina", "pregledi"],
+        "properties": {
+          "izvodac": { "type": "string" },
+          "pjesma": { "type": "string" },
+          "godina": { "type": "string" },
+          "pregledi": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+

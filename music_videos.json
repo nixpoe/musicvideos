@@ -1,145 +1,290 @@
 [
-   {
-      "Naslov":"Drake - First Person Shooter ft. J. Cole",
-      "Redatelj":"Gibson Hazard",
-      "Label":"OVO",
-      "Datum":"2023-11-15",
-      "Trajanje_sekunde":300,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":67461946,
-      "komentari":61134,
-      "lajkovi":1200000,
-      "izvodaci":[
-         "Drake",
-         "J. Cole"
-      ]
-   },
-   {
-      "Naslov":"Travis Scott - FE!N ft. Playboi Carti ",
-      "Redatelj":"Gabriel Moses",
-      "Label":"Cactus Jack Records",
-      "Datum":"2024-03-30",
-      "Trajanje_sekunde":209,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":100240856,
-      "komentari":51076,
-      "lajkovi":1700000,
-      "izvodaci":[
-         "Playboi Carti",
-         "Travis Scott"
-      ]
-   },
-   {
-      "Naslov":"Travis Scott - Drugs You Should Try It ",
-      "Redatelj":"Jordan Hemingway",
-      "Label":"Cactus Jack Records",
-      "Datum":"2024-08-27",
-      "Trajanje_sekunde":208,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":6595208,
-      "komentari":12610,
-      "lajkovi":280000,
-      "izvodaci":[
-         "Travis Scott"
-      ]
-   },
-   {
-      "Naslov":"Travis Scott - MO CITY FLEXOLOGIST",
-      "Redatelj":"Kahlil Joseph",
-      "Label":"Cactus Jack Records",
-      "Datum":"2024-09-24",
-      "Trajanje_sekunde":216,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":6538357,
-      "komentari":7559,
-      "lajkovi":275000,
-      "izvodaci":[
-         "Travis Scott"
-      ]
-   },
-   {
-      "Naslov":"THOUGHT I WAS DEAD",
-      "Redatelj":"Tyler Okonma",
-      "Label":"Columbia Records",
-      "Datum":"2024-10-26",
-      "Trajanje_sekunde":108,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":3784264,
-      "komentari":24070,
-      "lajkovi":466000,
-      "izvodaci":[
-         "Tyler, The Creator"
-      ]
-   },
-   {
-      "Naslov":"NOID",
-      "Redatelj":"Tyler Okonma",
-      "Label":"Columbia Records",
-      "Datum":"2024-10-21",
-      "Trajanje_sekunde":162,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":8689820,
-      "komentari":31782,
-      "lajkovi":699000,
-      "izvodaci":[
-         "Tyler, The Creator"
-      ]
-   },
-   {
-      "Naslov":"Childish Gambino - This Is America (Official Video)",
-      "Redatelj":"Hiro Murai",
-      "Label":"RCA Records",
-      "Datum":"2018-05-06",
-      "Trajanje_sekunde":246,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":934548549,
-      "komentari":791503,
-      "lajkovi":12000000,
-      "izvodaci":[
-         "Childish Gambino"
-      ]
-   },
-   {
-      "Naslov":"KSI - Thick Of It (feat. Trippie Redd) [Official Music Video] ",
-      "Redatelj":"KC Locke\\n",
-      "Label":"Atlantic Records UK",
-      "Datum":"2024-10-03",
-      "Trajanje_sekunde":176,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":44248440,
-      "komentari":522112,
-      "lajkovi":922000,
-      "izvodaci":[
-         "KSI",
-         "Trippie Redd"
-      ]
-   },
-   {
-      "Naslov":"EARFQUAKE",
-      "Redatelj":"Tyler Okonma",
-      "Label":"Columbia Records",
-      "Datum":"2019-05-17",
-      "Trajanje_sekunde":266,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":155996909,
-      "komentari":98431,
-      "lajkovi":3000000,
-      "izvodaci":[
-         "Tyler, The Creator"
-      ]
-   },
-   {
-      "Naslov":"Kendrick Lamar - Not Like Us",
-      "Redatelj":"Kendrick Lamar, Dave Free",
-      "Label":"Interscope Records",
-      "Datum":"2024-05-07",
-      "Trajanje_sekunde":354,
-      "Zanr":"Hip-hop/Rap",
-      "pregledi":162807195,
-      "komentari":289832,
-      "lajkovi":4900000,
-      "izvodaci":[
-         "Kendrick Lamar"
-      ]
-   }
+  {
+    "Naslov": "Drake - First Person Shooter ft. J. Cole",
+    "Redatelj": "Gibson Hazard",
+    "Label": "OVO",
+    "Datum": "2023-11-15",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 67461946,
+    "komentari": 61134,
+    "lajkovi": 1200000,
+    "izvodaci": [
+      "Drake",
+      "J. Cole"
+    ]
+  },
+  {
+    "Naslov": "Travis Scott - FE!N ft. Playboi Carti ",
+    "Redatelj": "Gabriel Moses",
+    "Label": "Cactus Jack Records",
+    "Datum": "2024-03-30",
+    "Trajanje_sekunde": 209,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 100240856,
+    "komentari": 51076,
+    "lajkovi": 1700000,
+    "izvodaci": [
+      "Playboi Carti",
+      "Travis Scott"
+    ]
+  },
+  {
+    "Naslov": "Travis Scott - Drugs You Should Try It ",
+    "Redatelj": "Jordan Hemingway",
+    "Label": "Cactus Jack Records",
+    "Datum": "2024-08-27",
+    "Trajanje_sekunde": 208,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 6595208,
+    "komentari": 12610,
+    "lajkovi": 280000,
+    "izvodaci": [
+      "Travis Scott"
+    ]
+  },
+  {
+    "Naslov": "Travis Scott - MO CITY FLEXOLOGIST",
+    "Redatelj": "Kahlil Joseph",
+    "Label": "Cactus Jack Records",
+    "Datum": "2024-09-24",
+    "Trajanje_sekunde": 216,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 6538357,
+    "komentari": 7559,
+    "lajkovi": 275000,
+    "izvodaci": [
+      "Travis Scott"
+    ]
+  },
+  {
+    "Naslov": "THOUGHT I WAS DEAD",
+    "Redatelj": "Tyler Okonma",
+    "Label": "Columbia Records",
+    "Datum": "2024-10-26",
+    "Trajanje_sekunde": 108,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 3784264,
+    "komentari": 24070,
+    "lajkovi": 466000,
+    "izvodaci": [
+      "Tyler, The Creator"
+    ]
+  },
+  {
+    "Naslov": "NOID",
+    "Redatelj": "Tyler Okonma",
+    "Label": "Columbia Records",
+    "Datum": "2024-10-21",
+    "Trajanje_sekunde": 162,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 8689820,
+    "komentari": 31782,
+    "lajkovi": 699000,
+    "izvodaci": [
+      "Tyler, The Creator"
+    ]
+  },
+  {
+    "Naslov": "Childish Gambino - This Is America (Official Video)",
+    "Redatelj": "Hiro Murai",
+    "Label": "RCA Records",
+    "Datum": "2018-05-06",
+    "Trajanje_sekunde": 246,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 934548549,
+    "komentari": 791503,
+    "lajkovi": 12000000,
+    "izvodaci": [
+      "Childish Gambino"
+    ]
+  },
+  {
+    "Naslov": "KSI - Thick Of It (feat. Trippie Redd) [Official Music Video] ",
+    "Redatelj": "KC Locke\\n",
+    "Label": "Atlantic Records UK",
+    "Datum": "2024-10-03",
+    "Trajanje_sekunde": 176,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 44248440,
+    "komentari": 522112,
+    "lajkovi": 922000,
+    "izvodaci": [
+      "KSI",
+      "Trippie Redd"
+    ]
+  },
+  {
+    "Naslov": "EARFQUAKE",
+    "Redatelj": "Tyler Okonma",
+    "Label": "Columbia Records",
+    "Datum": "2019-05-17",
+    "Trajanje_sekunde": 266,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 155996909,
+    "komentari": 98431,
+    "lajkovi": 3000000,
+    "izvodaci": [
+      "Tyler, The Creator"
+    ]
+  },
+  {
+    "Naslov": "Kendrick Lamar - Not Like Us",
+    "Redatelj": "Kendrick Lamar, Dave Free",
+    "Label": "Interscope Records",
+    "Datum": "2024-05-07",
+    "Trajanje_sekunde": 354,
+    "Zanr": "Hip-hop/Rap",
+    "pregledi": 162807195,
+    "komentari": 289832,
+    "lajkovi": 4900000,
+    "izvodaci": [
+      "Kendrick Lamar"
+    ]
+  },
+  {
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "id": "test123",
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "id": "test123",
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "id": "test123",
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "id": "test123",
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  },
+  {
+    "id": "test123",
+    "Naslov": "Test Video",
+    "Redatelj": "Test Director",
+    "Label": "Test Label",
+    "Datum": "2024-01-19",
+    "Trajanje_sekunde": 300,
+    "Zanr": "Pop",
+    "pregledi": 1000,
+    "komentari": 50,
+    "lajkovi": 100,
+    "izvodaci": [
+      "Test Artist"
+    ]
+  }
 ]
